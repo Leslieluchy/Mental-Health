@@ -1,0 +1,8 @@
+
+.login-section{
+    max-width: 40%;
+    justify-content: center;
+}
+
+/*<label for="username" minlength="8" maxlengthclass="12" class="lead">Username</label>
+    <input type="text" id="username" name="username" placeholder="Any nickname" required>  */
