@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - Mental Juu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        section {
+            padding: 60px 0;
+            background-color: bisque;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+        .card img {
+            height: 200px;
+            object-fit: cover;
+        }
+        .profile-icon {
+            font-size: 24px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark pt-5 pb-4">
+        <div class="container-xxl">
+            <a class="navbar-brand" href="index.html">
+                <span class="display-5">Mental Juu</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout.php">Sign Out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- User Dashboard -->
+    <section class="dashboard">
+        <div class="container">
+            <div class="row">
+                <!-- Book Session Card -->
+                <div class="col-md-6">
+                    <div class="card">
+                        <img src="assets/therapist1.jpg" class="card-img-top" alt="Therapist Photo">
+                        <div class="card-body">
+                            <h5 class="card-title">Book a Session</h5>
+                            <p class="card-text">Find a therapist and book your session now.</p>
+                            <a href="booking_form.html" class="btn btn-primary">Book Session</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upcoming Sessions Card -->
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Upcoming Sessions</h5>
+                            <p class="card-text">View your scheduled sessions and manage appointments.</p>
+                            <a href="upcoming_sessions.html" class="btn btn-primary">View Upcoming Sessions</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Icon -->
+    <div class="container-fluid">
+        <div class="row justify-content-end">
+            <div class="col-auto">
+                <span class="profile-icon text-white" data-bs-toggle="tooltip" data-bs-placement="left" title="Profile">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm0 4a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/>
+                        <path fill-rule="evenodd" d="M8 9a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+                        <path fill-rule="evenodd" d="M8 10c-1.5 0-4 .75-4 2.5v1h8v-1c0-1.75-2.5-2.5-4-2.5z"/>
+                    </svg>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- Tooltip Initialization -->
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    </script>
+</body>
+</html>
+

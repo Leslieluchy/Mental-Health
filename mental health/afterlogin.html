@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - Mental Juu</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        section {
+            padding: 60px 0;
+            background-color: bisque;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+        .card img {
+            height: 200px;
+            object-fit: cover;
+        }
+        .profile-icon {
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .therapist-card {
+            margin-bottom: 30px;
+        }
+        .therapist-photo {
+            max-height: 200px;
+            object-fit: cover;
+        }
+        .therapist-details {
+            padding: 20px;
+        }
+        .view-sessions {
+            text-align: center;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark pt-5 pb-4">
+        <div class="container-xxl">
+            <a class="navbar-brand" href="index.html">
+                <span class="display-5">Mental Juu</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="logout.php">Sign Out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- User Dashboard -->
+    <section class="dashboard">
+        <div class="container">
+            <div class="row">
+                <!-- Therapist Card 1 -->
+                <div class="col-md-4 therapist-card">
+                    <div class="card">
+                        <img src="assets/therapist1.jpg" class="card-img-top therapist-photo" alt="Therapist Photo">
+                        <div class="card-body therapist-details">
+                            <h5 class="card-title">Dr. Jane Doe</h5>
+                            <p class="card-text">Licensed psychologist with over 10 years of experience in stress management, marriage counseling, and family therapy.</p>
+                            <p><strong>Categories:</strong> Stress, Marriage, Family</p>
+                            <p><strong>Experience:</strong> 10+ years</p>
+                            <a href="booking_form.html?therapist=JaneDoe" class="btn btn-primary">Book a Session</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Therapist Card 2 -->
+                <div class="col-md-4 therapist-card">
+                    <div class="card">
+                        <img src="assets/therapist2.jpg" class="card-img-top therapist-photo" alt="Therapist Photo">
+                        <div class="card-body therapist-details">
+                            <h5 class="card-title">Dr. John Smith</h5>
+                            <p class="card-text">Specializes in anxiety, depression, and trauma recovery with over 8 years of clinical experience.</p>
+                            <p><strong>Categories:</strong> Anxiety, Depression, Trauma</p>
+                            <p><strong>Experience:</strong> 8+ years</p>
+                            <a href="booking_form.html?therapist=JohnSmith" class="btn btn-primary">Book a Session</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Therapist Card 3 -->
+                <div class="col-md-4 therapist-card">
+                    <div class="card">
+                        <img src="assets/therapist3.jpg" class="card-img-top therapist-photo" alt="Therapist Photo">
+                        <div class="card-body therapist-details">
+                            <h5 class="card-title">Dr. Emily Brown</h5>
+                            <p class="card-text">Expertise in cognitive behavioral therapy, especially for young adults.</p>
+                            <p><strong>Categories:</strong> CBT, Young Adults</p>
+                            <p><strong>Experience:</strong> 7+ years</p>
+                            <a href="booking_form.html?therapist=EmilyBrown" class="btn btn-primary">Book a Session</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Therapist Card 4 -->
+                <div class="col-md-4 therapist-card">
+                    <div class="card">
+                        <img src="assets/therapist4.jpg" class="card-img-top therapist-photo" alt="Therapist Photo">
+                        <div class="card-body therapist-details">
+                            <h5 class="card-title">Dr. Michael Johnson</h5>
+                            <p class="card-text">Focuses on addiction recovery with 12+ years of experience.</p>
+                            <p><strong>Categories:</strong> Addiction, Substance Abuse</p>
+                            <p><strong>Experience:</strong> 12+ years</p>
+                            <a href="booking_form.html?therapist=MichaelJohnson" class="btn btn-primary">Book a Session</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Therapist Card 5 -->
+                <div class="col-md-4 therapist-card">
+                    <div class="card">
+                        <img src="assets/therapist5.jpg" class="card-img-top therapist-photo" alt="Therapist Photo">
+                        <div class="card-body therapist-details">
+                            <h5 class="card-title">Dr. Sarah Lee</h5>
+                            <p class="card-text">Expertise in child psychology and family therapy.</p>
+                            <p><strong>Categories:</strong> Child Psychology, Family Therapy</p>
+                            <p><strong>Experience:</strong> 9+ years</p>
+                            <a href="booking_form.html?therapist=SarahLee" class="btn btn-primary">Book a Session</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Therapist Card 6 -->
+                <div class="col-md-4 therapist-card">
+                    <div class="card">
+                        <img src="assets/therapist6.jpg" class="card-img-top therapist-photo" alt="Therapist Photo">
+                        <div class="card-body therapist-details">
+                            <h5 class="card-title">Dr. David Wilson</h5>
+                            <p class="card-text">Specializes in grief counseling and coping with loss.</p>
+                            <p><strong>Categories:</strong> Grief Counseling, Loss</p>
+                            <p><strong>Experience:</strong> 11+ years</p>
+                            <a href="booking_form.html?therapist=DavidWilson" class="btn btn-primary">Book a Session</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Therapist Card 7 -->
+                <div class="col-md-4 therapist-card">
+                    <div class="card">
+                        <img src="assets/therapist7.jpg" class="card-img-top therapist-photo" alt="Therapist Photo">
+                        <div class="card-body therapist-details">
+                            <h5 class="card-title">Dr. Laura Martinez</h5>
+                            <p class="card-text">Expertise in trauma recovery and PTSD therapy.</p>
+                            <p><strong>Categories:</strong> Trauma, PTSD, Veterans</p>
+                            <p><strong>Experience:</strong> 14+ years</p>
+                            <a href="booking_form.html?therapist=LauraMartinez" class="btn btn-primary">Book a Session</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Therapist Card 8 -->
+                <div class="col-md-4 therapist-card">
+                    <div class="card">
+                        <img src="assets/therapist8.jpg" class="card-img-top therapist-photo" alt="Therapist Photo">
+                        <div class="card-body therapist-details">
+                            <h5 class="card-title">Dr. Robert Garcia</h5>
+                            <p class="card-text">Focuses on holistic mental health practices, mindfulness, and meditation.</p>
+                            <p><strong>Categories:</strong> Holistic, Mindfulness, Meditation</p>
+                            <p><strong>Experience:</strong> 15+ years</p>
+                            <a href="booking_form.html?therapist=RobertGarcia" class="btn btn-primary">Book a Session</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View Upcoming Sessions -->
+            <div class="row view-s
+
