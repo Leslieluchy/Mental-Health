@@ -1,3 +1,19 @@
+<?php
+require_once 'dbconnection.inc.php';
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: index.html");
+}else{
+  $filter = $_SESSION['username'];
+  $fil1 = $_SESSION['spec'];
+  $fil2 = $_SESSION['age'];
+  $fil3 = $_SESSION['comm'];
+  $fil4 = $_SESSION['loc'];
+  $query=mysqli_query($conn,"SELECT * FROM `users` WHERE `User_ID`='$filter'")or die(mysqli_error());
+  $row=mysqli_fetch_array($query);
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -12,7 +28,7 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>Mind Care - Homepage</title>
+  <title>Mind Care - User Homepage</title>
 
 
   <!-- bootstrap core css -->
@@ -30,7 +46,31 @@
   <link href="css/responsive.css" rel="stylesheet" />
 
 </head>
+        <style type="text/css">
+        
+          table{
+    align-items: center;
+  }
 
+   th, tr, td{
+    padding: 10px 10px;
+  }
+    </style>
+
+            <script type="text/javascript">
+function printData()
+{
+   var divToPrint=document.getElementById("printTable");
+   newWin= window.open("");
+   newWin.document.write(divToPrint.outerHTML);
+   newWin.print();
+   newWin.close();
+}
+
+$('button').on('click',function(){
+printData();
+})  
+</script>
 <body>
 
   <div class="hero_area">
@@ -49,13 +89,13 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  ml-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="index2.php">Home <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#about"> About</a>
-              </li>
+                <a class="nav-link" href="my_profile.php"> My Profile</a>
+              </li>  
               <li class="nav-item">
-                <a class="nav-link" href="start.html">Get Started</a>
+                <a class="nav-link" href="logout.php">Logout</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#contact">Contact Us</a>
@@ -67,7 +107,7 @@
     </header>
     <!-- end header section -->
     <!-- slider section -->
-    <section class="slider_section ">
+     <section class="slider_section ">
       <div id="customCarousel1" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
@@ -76,14 +116,14 @@
                 <div class="col-md-6">
                   <div class="detail-box">
                     <h1>
-                      Mind Care, <br>
-                      Your Mental Health Web App
+                    Mind Care, <br>
+                    The Mental Health App
                     </h1>
                     <p>
-                      Building Resilience, Finding Balance.</p>
+                      Welcome <?php echo $row['User_Type']; ?>, <?php echo $row['Fullname']; ?>!</p>
                     <div class="btn-box">
-                      <a href="#about" class="btn-1">
-                        Read More
+                      <a href="my_profile.php" class="btn-1">
+                        My Profile
                       </a>
                       <a href="#contact" class="btn-2">
                         Contact Us
@@ -109,14 +149,14 @@
                 <div class="col-md-6">
                   <div class="detail-box">
                     <h1>
-                     Mind Care, <br>
-                     Your Mental Health Web App
+                    Mind Care, <br>
+                    The Mental Health App
                     </h1>
                     <p>
-                      Breaking the Stigma.</p>
+                      Welcome <?php echo $row['User_Type']; ?>, <?php echo $row['Fullname']; ?>!</p>
                     <div class="btn-box">
-                      <a href="#about" class="btn-1">
-                        Read More
+                      <a href="index_chat1.php" class="btn-1">
+                      View Chat
                       </a>
                       <a href="#contact" class="btn-2">
                         Contact Us
@@ -142,14 +182,14 @@
                 <div class="col-md-6">
                   <div class="detail-box">
                     <h1>
-                      Mind Care, <br>
-                      Your Mental Health Web App
+                    Mind Care, <br>
+                    The Mental Health App
                     </h1>
                     <p>
-                     Supportive Community, Caring Professionals.</p>
+                     Welcome <?php echo $row['User_Type']; ?>, <?php echo $row['Fullname']; ?>!</p>
                     <div class="btn-box">
-                      <a href="#about" class="btn-1">
-                        Read More
+                      <a href="logout.php" class="btn-1">
+                      Logout
                       </a>
                       <a href="#contact" class="btn-2">
                         Contact Us
@@ -185,34 +225,61 @@
     <!-- end slider section -->
   </div>
 
-
-  <!-- about section -->
-
-  <section class="about_section layout_padding-bottom" id="about">
-    <div class="container  ">
+  <!-- contact section -->
+  <section class="contact_section layout_padding-bottom" id="start">
+    <br>
+<br>
+<br>
+<br>
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2>
+          Schedule Your First Session
+        </h2>
+      </div>
       <div class="row">
-        <div class="col-md-6">
-          <div class="detail-box">
-            <div class="heading_container">
-              <h2>
-                About Us
-              </h2>
-            </div>
-            <p>
-              Welcome to the Mind Care, a trusted online platform dedicated to promoting mental well-being and offering valuable resources to individuals seeking support. Our team of experts includes licensed therapists, counselors, and mental health advocates who are passionate about breaking the barriers surrounding mental health.</p>
+                <div class="col-md-12 col-lg-12 mx-auto">
+          <div class="form_container">
+            <form action="insertion.inc.php" method="POST">
+              <div>
+                <label>Session Date:</label>
+                <input type="date" min="<?php echo date('Y-m-d'); ?>" name="date" required />
+              </div>
+              <div>
+                <label>Session Time:</label>
+                <input type="time" name="time" required />
+              </div>
+              <div>
+                                                <select required name="sid">
+                                <option selected disabled value="0">Select A Specialist</option>
+                                     <?php
+                                      $con = mysqli_connect("localhost","root","","mental_health_app");
+                                      $sql = "SELECT * FROM `users` WHERE `Specialist` = '$fil1' AND `Age_Group` = '$fil2' AND `Communication` = '$fil3' AND `Location` = '$fil4' AND `User_Type` = 'Specialist'";
+                                      $all_categories = mysqli_query($con,$sql);
+                                      while ($category = mysqli_fetch_array(
+                                              $all_categories,MYSQLI_ASSOC)):;
+                                  ?>
+                                  <option value="<?php echo $category["User_ID"];?>"><?php echo $category["Fullname"];?></option>
+                                  <?php
+                                      endwhile;
+                                  ?>
+                                </select>
+              </div>                          
+              <div>
+                <input type="text" required class="message-box" placeholder="Session Details" name="det" />
+              </div>
+              <div class="btn_box ">
+                <button name="makeapp">
+                  SUBMIT
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-        <div class="col-md-6 ">
-          <div class="img-box">
-            <img src="images/a.jpg" alt="">
-          </div>
-        </div>
-
       </div>
     </div>
   </section>
-
-  <!-- end about section -->
+  <!-- end contact section -->
 
   <!-- info section -->
 
@@ -256,13 +323,9 @@
                 <img src="images/nav-bullet.png" alt="">
                 Home
               </a>
-              <a class="" href="#about">
+              <a class="" href="logout.php">
                 <img src="images/nav-bullet.png" alt="">
-                About
-              </a>
-              <a class="" href="start.html">
-                <img src="images/nav-bullet.png" alt="">
-                Get Started
+                Logout 
               </a>
               <a class="" href="#contact">
                 <img src="images/nav-bullet.png" alt="">

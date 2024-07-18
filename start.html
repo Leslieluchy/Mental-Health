@@ -12,7 +12,7 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>Mind Care - Homepage</title>
+  <title>Mind Care - Get Started Today</title>
 
 
   <!-- bootstrap core css -->
@@ -38,7 +38,7 @@
     <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="#">
+          <a class="navbar-brand" href="index.html">
             <span>Mind Care</span>
           </a>
 
@@ -49,10 +49,10 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  ml-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#about"> About</a>
+                <a class="nav-link" href="index.html"> About</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="start.html">Get Started</a>
@@ -82,7 +82,7 @@
                     <p>
                       Building Resilience, Finding Balance.</p>
                     <div class="btn-box">
-                      <a href="#about" class="btn-1">
+                      <a href="index.html" class="btn-1">
                         Read More
                       </a>
                       <a href="#contact" class="btn-2">
@@ -115,7 +115,7 @@
                     <p>
                       Breaking the Stigma.</p>
                     <div class="btn-box">
-                      <a href="#about" class="btn-1">
+                      <a href="index.html" class="btn-1">
                         Read More
                       </a>
                       <a href="#contact" class="btn-2">
@@ -148,7 +148,7 @@
                     <p>
                      Supportive Community, Caring Professionals.</p>
                     <div class="btn-box">
-                      <a href="#about" class="btn-1">
+                      <a href="index.html" class="btn-1">
                         Read More
                       </a>
                       <a href="#contact" class="btn-2">
@@ -185,34 +185,75 @@
     <!-- end slider section -->
   </div>
 
-
-  <!-- about section -->
-
-  <section class="about_section layout_padding-bottom" id="about">
-    <div class="container  ">
+  <!-- contact section -->
+  <section class="contact_section layout_padding-bottom" id="start">
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2>
+          Get Started
+        </h2>
+      </div>
       <div class="row">
-        <div class="col-md-6">
-          <div class="detail-box">
-            <div class="heading_container">
-              <h2>
-                About Us
-              </h2>
-            </div>
-            <p>
-              Welcome to the Mind Care, a trusted online platform dedicated to promoting mental well-being and offering valuable resources to individuals seeking support. Our team of experts includes licensed therapists, counselors, and mental health advocates who are passionate about breaking the barriers surrounding mental health.</p>
+        <div class="col-md-6 col-lg-6 mx-auto">
+          <div class="form_container">
+            <form action="authentication.php" method="POST">
+              <div>
+                <input type="email" placeholder="Your Email" name="email" required />
+              </div>
+              <div>
+                <input type="password" placeholder="Your Password" id="pass2" name="password" required />
+                <br>
+                 <input type="checkbox"  style="width: 12px;" onclick="showPass2();"> Show Password
+              </div>                          
+              <div class="btn_box ">
+                <button name="login">
+                  LOGIN
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-        <div class="col-md-6 ">
-          <div class="img-box">
-            <img src="images/a.jpg" alt="">
+                <div class="col-md-6 col-lg-6 mx-auto">
+          <div class="form_container">
+            <form action="insertion.inc.php" method="POST" enctype="multipart/form-data">
+              <div>
+                <input type="text" placeholder="Your Name" name="fname" required />
+                <input type="hidden" value="1" name="mod" required>
+              </div>
+              <div>
+                <input type="email" placeholder="Your Email" name="email" required />
+              </div>
+              <div>
+                <input type="text" placeholder="Your Phone" name="phone" required />
+              </div>
+              <div>
+                <br>
+                <label>Profile Picture:</label>
+                <input type="file" accept=".jpg, .png, .jpeg" name="image" required />
+                <br>
+              </div>              
+              <div>
+                <input type="password" placeholder="Your Password" id="pass" name="password" required />
+                 <br>
+                <input type="checkbox" style="width: 12px;" onclick="showPass();"> Show Password
+              </div>
+              <div>
+                <input type="password" placeholder="Confirm Your Password" id="pass1" name="cpassword" required />
+<br>
+ <input type="checkbox" style="width: 12px;" onclick="showPass1();"> Show Password
+              </div>                            
+              <div class="btn_box ">
+                <button name="regu">
+                  REGISTER
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-
       </div>
     </div>
   </section>
-
-  <!-- end about section -->
+  <!-- end contact section -->
 
   <!-- info section -->
 
@@ -252,11 +293,11 @@
               Links
             </h4>
             <div class="info_links">
-              <a class="active" href="#">
+              <a class="active" href="index.html">
                 <img src="images/nav-bullet.png" alt="">
                 Home
               </a>
-              <a class="" href="#about">
+              <a class="" href="index.html">
                 <img src="images/nav-bullet.png" alt="">
                 About
               </a>
@@ -264,7 +305,7 @@
                 <img src="images/nav-bullet.png" alt="">
                 Get Started
               </a>
-              <a class="" href="#contact">
+              <a class="" href="index.html">
                 <img src="images/nav-bullet.png" alt="">
                 Contact Us
               </a>
@@ -276,7 +317,32 @@
   </section>
 
   <!-- end info section -->
-
+<script type="text/javascript">
+        function showPass() {
+  var x = document.getElementById("pass");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+        function showPass1() {
+  var x = document.getElementById("pass1");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+        function showPass2() {
+  var x = document.getElementById("pass2");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+    </script>
 
   <!-- footer section -->
   <footer class="footer_section">

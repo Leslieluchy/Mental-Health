@@ -1,3 +1,14 @@
+<?php
+require_once 'dbconnection.inc.php';
+session_start();
+if (!isset($_SESSION['upuid'])) {
+    header("Location: index.html");
+}else{
+  $filter = $_SESSION['upuid'];
+  $query=mysqli_query($conn,"SELECT * FROM `users` WHERE `User_ID`='$filter'")or die(mysqli_error());
+  $row=mysqli_fetch_array($query);
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -12,7 +23,7 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>Mind Care - Homepage</title>
+  <title>Mind Care - My Profile Page</title>
 
 
   <!-- bootstrap core css -->
@@ -30,7 +41,6 @@
   <link href="css/responsive.css" rel="stylesheet" />
 
 </head>
-
 <body>
 
   <div class="hero_area">
@@ -52,10 +62,10 @@
                 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#about"> About</a>
-              </li>
+                <a class="nav-link" href="my_profile.php"> My Profile</a>
+              </li>  
               <li class="nav-item">
-                <a class="nav-link" href="start.html">Get Started</a>
+                <a class="nav-link" href="logout.php">Logout</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#contact">Contact Us</a>
@@ -76,14 +86,14 @@
                 <div class="col-md-6">
                   <div class="detail-box">
                     <h1>
-                      Mind Care, <br>
-                      Your Mental Health Web App
+                    Mind Care, <br>
+                    The Mental Health App
                     </h1>
                     <p>
-                      Building Resilience, Finding Balance.</p>
+                      Welcome <?php echo $row['User_Type']; ?>, <?php echo $row['Fullname']; ?>!</p>
                     <div class="btn-box">
-                      <a href="#about" class="btn-1">
-                        Read More
+                      <a href="my_profile.php" class="btn-1">
+                        My Profile
                       </a>
                       <a href="#contact" class="btn-2">
                         Contact Us
@@ -109,14 +119,14 @@
                 <div class="col-md-6">
                   <div class="detail-box">
                     <h1>
-                     Mind Care, <br>
-                     Your Mental Health Web App
+                    Mind Care, <br>
+                    The Mental Health App
                     </h1>
                     <p>
-                      Breaking the Stigma.</p>
+                      Welcome <?php echo $row['User_Type']; ?>, <?php echo $row['Fullname']; ?>!</p>
                     <div class="btn-box">
-                      <a href="#about" class="btn-1">
-                        Read More
+                      <a href="index_chat.php" class="btn-1">
+                      View Chat
                       </a>
                       <a href="#contact" class="btn-2">
                         Contact Us
@@ -142,14 +152,14 @@
                 <div class="col-md-6">
                   <div class="detail-box">
                     <h1>
-                      Mind Care, <br>
-                      Your Mental Health Web App
+                    Mind Care, <br>
+                    The Mental Health App
                     </h1>
                     <p>
-                     Supportive Community, Caring Professionals.</p>
+                     Welcome <?php echo $row['User_Type']; ?>, <?php echo $row['Fullname']; ?>!</p>
                     <div class="btn-box">
-                      <a href="#about" class="btn-1">
-                        Read More
+                      <a href="logout.php" class="btn-1">
+                      Logout
                       </a>
                       <a href="#contact" class="btn-2">
                         Contact Us
@@ -185,34 +195,55 @@
     <!-- end slider section -->
   </div>
 
-
-  <!-- about section -->
-
-  <section class="about_section layout_padding-bottom" id="about">
-    <div class="container  ">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="detail-box">
-            <div class="heading_container">
-              <h2>
-                About Us
-              </h2>
-            </div>
-            <p>
-              Welcome to the Mind Care, a trusted online platform dedicated to promoting mental well-being and offering valuable resources to individuals seeking support. Our team of experts includes licensed therapists, counselors, and mental health advocates who are passionate about breaking the barriers surrounding mental health.</p>
-          </div>
-        </div>
-        <div class="col-md-6 ">
-          <div class="img-box">
-            <img src="images/a.jpg" alt="">
-          </div>
-        </div>
-
+  <!-- contact section -->
+  <section class="contact_section layout_padding-bottom" id="start">
+    <div class="container">
+      <div class="heading_container heading_center">
+        <br>
+        <br>
+        <h2>
+          My Profile Details
+        </h2>
       </div>
+      <div class="row">
+        <div class="col-md-6 col-lg-12 mx-auto">
+          <div class="form_container">
+            <form action="insertion.inc.php" method="POST">
+              <div>
+                <input type="text" placeholder="Your Name" name="fname" value="<?php echo $row['Fullname'] ?>" required />
+                <input type="hidden" value="<?php echo $row['User_Type']; ?>" name="mod" required>
+                <input type="hidden" value="<?php echo $filter; ?>" name="uid" required>
+              </div>
+              <div>
+                <input type="email" placeholder="Your Email" name="email" value="<?php echo $row['Email_Address'] ?>" required />
+              </div>
+              <div>
+                <input type="text" placeholder="Your Phone" name="phone" value="<?php echo $row['Phone_Number'] ?>" required />
+              </div>
+              <div>
+                <input type="password" id="pass" placeholder="Your Password" name="password" required />
+                <br>
+                 <input type="checkbox"  style="width: 12px;" onclick="showPass();"> Show Password
+              </div>
+              <div>
+                <input type="password" id="pass1" placeholder="Confirm Your Password" name="cpassword" required />
+                <br>
+                 <input type="checkbox" style="width: 12px;" onclick="showPass1();"> Show Password
+              </div>                          
+              <div class="btn_box ">
+                <button name="upu">
+                  UPDATE MY DETAILS
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+        <br>
+<br>
     </div>
   </section>
-
-  <!-- end about section -->
+  <!-- end contact section -->
 
   <!-- info section -->
 
@@ -256,13 +287,9 @@
                 <img src="images/nav-bullet.png" alt="">
                 Home
               </a>
-              <a class="" href="#about">
+              <a class="" href="logout.php">
                 <img src="images/nav-bullet.png" alt="">
-                About
-              </a>
-              <a class="" href="start.html">
-                <img src="images/nav-bullet.png" alt="">
-                Get Started
+                Logout
               </a>
               <a class="" href="#contact">
                 <img src="images/nav-bullet.png" alt="">
@@ -277,6 +304,24 @@
 
   <!-- end info section -->
 
+<script type="text/javascript">
+        function showPass() {
+  var x = document.getElementById("pass");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+        function showPass1() {
+  var x = document.getElementById("pass1");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+    </script>
 
   <!-- footer section -->
   <footer class="footer_section">

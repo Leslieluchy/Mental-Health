@@ -1,3 +1,17 @@
+<?php
+require_once 'dbconnection.inc.php';
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: index.html");
+}else{
+  $filter = $_SESSION['username'];
+  $query=mysqli_query($conn,"SELECT * FROM `users` WHERE `User_ID`='$filter'")or die(mysqli_error());
+  $row=mysqli_fetch_array($query);
+  $query1=mysqli_query($conn,"SELECT COUNT(*) AS `Un` FROM `chat` WHERE `reciever_userid`='$filter' AND `status` = '1'")or die(mysqli_error());
+  $row1=mysqli_fetch_array($query1);
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -12,7 +26,7 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>Mind Care - Homepage</title>
+  <title>Mind Care - User Homepage</title>
 
 
   <!-- bootstrap core css -->
@@ -30,7 +44,31 @@
   <link href="css/responsive.css" rel="stylesheet" />
 
 </head>
+        <style type="text/css">
+        
+          table{
+    align-items: center;
+  }
 
+   th, tr, td{
+    padding: 10px 10px;
+  }
+    </style>
+
+            <script type="text/javascript">
+function printData()
+{
+   var divToPrint=document.getElementById("printTable");
+   newWin= window.open("");
+   newWin.document.write(divToPrint.outerHTML);
+   newWin.print();
+   newWin.close();
+}
+
+$('button').on('click',function(){
+printData();
+})  
+</script>
 <body>
 
   <div class="hero_area">
@@ -49,13 +87,16 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  ml-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="index2.php">Home <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#about"> About</a>
-              </li>
+              <a href="index_chat1.php" class="nav-link">Chat (<?php echo $row1['Un'] ?>)</a>
+              </li> 
+                            <li class="nav-item">
+                <a class="nav-link" href="my_profile.php"> My Profile</a>
+              </li>  
               <li class="nav-item">
-                <a class="nav-link" href="start.html">Get Started</a>
+                <a class="nav-link" href="logout.php">Logout</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#contact">Contact Us</a>
@@ -76,14 +117,14 @@
                 <div class="col-md-6">
                   <div class="detail-box">
                     <h1>
-                      Mind Care, <br>
-                      Your Mental Health Web App
+                    Mind Care, <br>
+                    The Mental Health App
                     </h1>
                     <p>
-                      Building Resilience, Finding Balance.</p>
+                      Welcome <?php echo $row['User_Type']; ?>, <?php echo $row['Fullname']; ?>!</p>
                     <div class="btn-box">
-                      <a href="#about" class="btn-1">
-                        Read More
+                      <a href="my_profile.php" class="btn-1">
+                        My Profile
                       </a>
                       <a href="#contact" class="btn-2">
                         Contact Us
@@ -109,14 +150,14 @@
                 <div class="col-md-6">
                   <div class="detail-box">
                     <h1>
-                     Mind Care, <br>
-                     Your Mental Health Web App
+                    Mind Care, <br>
+                    The Mental Health App
                     </h1>
                     <p>
-                      Breaking the Stigma.</p>
+                      Welcome <?php echo $row['User_Type']; ?>, <?php echo $row['Fullname']; ?>!</p>
                     <div class="btn-box">
-                      <a href="#about" class="btn-1">
-                        Read More
+                      <a href="index_chat1.php" class="btn-1">
+                      View Chat
                       </a>
                       <a href="#contact" class="btn-2">
                         Contact Us
@@ -142,14 +183,14 @@
                 <div class="col-md-6">
                   <div class="detail-box">
                     <h1>
-                      Mind Care, <br>
-                      Your Mental Health Web App
+                    Mind Care, <br>
+                    The Mental Health App
                     </h1>
                     <p>
-                     Supportive Community, Caring Professionals.</p>
+                     Welcome <?php echo $row['User_Type']; ?>, <?php echo $row['Fullname']; ?>!</p>
                     <div class="btn-box">
-                      <a href="#about" class="btn-1">
-                        Read More
+                      <a href="logout.php" class="btn-1">
+                      Logout
                       </a>
                       <a href="#contact" class="btn-2">
                         Contact Us
@@ -186,40 +227,148 @@
   </div>
 
 
-  <!-- about section -->
-
-  <section class="about_section layout_padding-bottom" id="about">
-    <div class="container  ">
+ <!-- contact section -->
+  <section class="contact_section layout_padding-bottom" id="start"><br>
+<br>
+<br>
+<br>
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2>
+          Sessions
+        </h2>
+      </div>
       <div class="row">
-        <div class="col-md-6">
-          <div class="detail-box">
-            <div class="heading_container">
-              <h2>
-                About Us
-              </h2>
-            </div>
-            <p>
-              Welcome to the Mind Care, a trusted online platform dedicated to promoting mental well-being and offering valuable resources to individuals seeking support. Our team of experts includes licensed therapists, counselors, and mental health advocates who are passionate about breaking the barriers surrounding mental health.</p>
-          </div>
-        </div>
-        <div class="col-md-6 ">
-          <div class="img-box">
-            <img src="images/a.jpg" alt="">
-          </div>
-        </div>
+        <div class="col-md-12 col-lg-12 mx-auto">
+          <div class="form_container">
+                                     <table id="printTable">
+<tr style="text-align: left;
+  padding: 8px;">
+<th style="text-align: left;
+  padding: 8px;">Session ID</th>
+<th style="text-align: left;
+  padding: 8px;">Details</th>
+  <th style="text-align: left;
+  padding: 8px;">Scheduled At</th>
+ <th style="text-align: left;
+  padding: 8px;">Status</th>
+  <th style="text-align: left;
+  padding: 8px;"></th>
+   <th style="text-align: left; padding: 8px;"></th>
+</tr>
 
+<?php
+$conn = mysqli_connect("localhost", "root", "", "mental_health_app");
+// Check connection
+if ($conn->connect_error) {
+die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "SELECT `Appointment_ID`, `Details`, `Date`, `Time`, `Status` FROM `appointments` WHERE `User_ID` = '$filter'";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+// output data of each row
+while($row = $result->fetch_assoc()) {
+?>
+<tr>
+<td><?php echo($row["Appointment_ID"]); ?></td>
+<td><?php echo($row["Details"]); ?></td>
+<td><?php echo($row["Date"]); ?> at <?php echo($row["Time"]); ?></td>
+<td><?php echo($row["Status"]); ?></td>
+<td><button class="btn btn-primary py-3 px-5" onclick="return confirm('Are you sure that you want to delete this session?')?window.location.href='insertion.inc.php?action=deleteA&id=<?php echo($row["Appointment_ID"]); ?>':true;" title='Delete Session'>Delete</button></td>
+<?php
+if($row['Status'] == "Accepted"){
+?>
+<td><button class="btn btn-primary py-3 px-5" onclick="return confirm('Are you sure that you want to complete this session?')?window.location.href='insertion.inc.php?action=completeA&id=<?php echo($row["Appointment_ID"]); ?>':true;" title='Complete Session'>Complete</button></td>
+<?php
+}else if($row['Status'] == "Complete"){
+?>
+<td><button class="btn btn-primary py-3 px-5" onclick="return confirm('Are you sure that you want to view feedback from this session?')?window.location.href='insertion.inc.php?action=goF&id=<?php echo($row["Appointment_ID"]); ?>':true;" title='View Feedback'>View</button></td>
+<?php
+}else{
+?>
+<td></td>
+<?php
+}
+?>
+</tr>
+<?php
+}
+} else { echo "No results"; }
+$conn->close();
+?>
+
+</table>
+<br>
+<br>
+            <a onclick="printData();">
+              Print
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
+  <!-- end contact section -->
 
-  <!-- end about section -->
+  <!-- contact section -->
+  <section class="contact_section layout_padding-bottom" id="start">
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2>
+          Schedule A Session
+        </h2>
+      </div>
+      <div class="row">
+                <div class="col-md-6 col-lg-12 mx-auto">
+          <div class="form_container">
+            <form action="insertion.inc.php" method="POST">
+              <div>
+                <label>Session Date:</label>
+                <input type="date" min="<?php echo date('Y-m-d'); ?>" name="date" required />
+              </div>
+              <div>
+                <label>Session Time:</label>
+                <input type="time" name="time" required />
+              </div>
+              <div>
+                                                <select required name="sid">
+                                <option selected disabled value="0">Select An Existing Specialist</option>
+                                     <?php
+                                      $con = mysqli_connect("localhost","root","","mental_health_app");
+                                      $sql = "SELECT DISTINCT `users`.`User_ID`, `users`.`Fullname`, `appointments`.`Specialist_ID` FROM `users` JOIN `appointments` ON `users`.`User_ID` = `appointments`.`Specialist_ID` WHERE `users`.`User_Type` = 'Specialist'";
+                                      $all_categories = mysqli_query($con,$sql);
+                                      while ($category = mysqli_fetch_array(
+                                              $all_categories,MYSQLI_ASSOC)):;
+                                  ?>
+                                  <option value="<?php echo $category["User_ID"];?>"><?php echo $category["Fullname"];?></option>
+                                  <?php
+                                      endwhile;
+                                  ?>
+                                </select>
+              </div>                          
+              <div>
+                <input type="text" required class="message-box" placeholder="Session Details" name="det" />
+              </div>
+              <div class="btn_box ">
+                <button name="makeapp">
+                  SUBMIT
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- end contact section -->
 
   <!-- info section -->
 
   <section class="info_section layout_padding2" id="contact">
     <div class="container">
       <div class="row">
-        <div class="col-md-6">
+                <div class="col-md-6">
           <div class="info_contact">
             <h4>
               Contact Us
@@ -256,13 +405,9 @@
                 <img src="images/nav-bullet.png" alt="">
                 Home
               </a>
-              <a class="" href="#about">
+              <a class="" href="logout.php">
                 <img src="images/nav-bullet.png" alt="">
-                About
-              </a>
-              <a class="" href="start.html">
-                <img src="images/nav-bullet.png" alt="">
-                Get Started
+                Logout
               </a>
               <a class="" href="#contact">
                 <img src="images/nav-bullet.png" alt="">
